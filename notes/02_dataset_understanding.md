@@ -110,6 +110,7 @@ Environmental condition affecting goods and transportation.
 
 ---
 
+
 ### Traffic_Status
 
 Possible values:
