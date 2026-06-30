@@ -10,7 +10,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score, f1_s
 
 df = pd.read_csv("data/Processed_dataset.csv")
 
-X = df[["Latitude","Longitude","Inventory_Level","Temperature","Humidity","Waiting_Time", "User_Transaction_Amount","User_Purchase_Frequency","Asset_Utilization","Demand_Forecast","Year","Month","Day","Hour","Day_of_Week","Shipment_Status_Delivered","Shipment_Status_In Transit","Traffic_Status_Detour","Traffic_Status_Heavy"]]
+X = df[["Latitude","Longitude","Inventory_Level","Temperature","Humidity","Waiting_Time", "User_Transaction_Amount","User_Purchase_Frequency","Asset_Utilization","Demand_Forecast","Year","Month","Day","Hour","Day_of_Week","Traffic_Status_Detour","Traffic_Status_Heavy"]]
 Y = df["Logistics_Delay"]
 
 print(X.head())
@@ -43,3 +43,6 @@ Y_pred = model.predict(X_test)
 print("Accuracy:", accuracy_score(Y_test, Y_pred))
 print(confusion_matrix(Y_test, Y_pred))
 print(classification_report(Y_test, Y_pred))
+
+# Removed "Shipment_Status_Delivered","Shipment_Status_In Transit" columns because they were leakaging data and because of that out model was getting 100 accuracy 
+
