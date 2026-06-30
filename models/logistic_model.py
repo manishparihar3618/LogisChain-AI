@@ -11,7 +11,7 @@ from sklearn.metrics import (accuracy_score, precision_score, recall_score, f1_s
 
 df = pd.read_csv("data/Processed_dataset.csv")
 
-X = df.drop("Logistics_Delay",axis=1)
+X = df[["Latitude","Longitude","Inventory_Level","Temperature","Humidity","Waiting_Time", "User_Transaction_Amount","User_Purchase_Frequency","Asset_Utilization","Demand_Forecast","Year","Month","Day","Hour","Day_of_Week","Shipment_Status_Delivered","Shipment_Status_In Transit","Traffic_Status_Detour","Traffic_Status_Heavy"]]
 Y = df["Logistics_Delay"]
 
 
@@ -43,10 +43,10 @@ y_pred = model.predict(X_test)
 
 
 ## Evaluate
-print("Accuracy:", accuracy_score(Y_test, y_pred))
-print("Precision:", precision_score(Y_test, y_pred))
-print("Recall:", recall_score(Y_test, y_pred))
-print("F1 Score:", f1_score(Y_test, y_pred))
+print("Accuracy:", accuracy_score(Y_test, y_pred)*100,"%")
+print("Precision:", precision_score(Y_test, y_pred)*100,"%")
+print("Recall:", recall_score(Y_test, y_pred)*100,"%")
+print("F1 Score:", f1_score(Y_test, y_pred)*100,"%")
 
 print(confusion_matrix(Y_test, y_pred))
 print(classification_report(Y_test, y_pred))
