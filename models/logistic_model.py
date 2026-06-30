@@ -14,20 +14,19 @@ df = pd.read_csv("data/Financial_Risk_Dataset.csv")
 encoder = LabelEncoder()
 Y = encoder.fit_transform(df["Financial_Risk"])
 
+
 X = df[["Latitude","Longitude","Inventory_Level","Temperature","Humidity","Waiting_Time", "User_Transaction_Amount","User_Purchase_Frequency","Asset_Utilization","Demand_Forecast","Year","Month","Day","Hour","Day_of_Week","Traffic_Status_Detour","Traffic_Status_Heavy"]]
-Y = df["Financial_Risk"]
-
-
-print(X.head())
-print(Y.head())
 
 
 ## Train_Test Split
-X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.2,random_state=42)
+X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.2,random_state=42,stratify=Y)
 print(X_train.shape)
 print(X_test.shape)
 print(Y_train.shape)
 print(Y_test.shape)
+print(pd.Series(Y_train).value_counts())
+print(pd.Series(Y_test).value_counts())
+print(encoder.classes_)
 
 
 
@@ -53,3 +52,7 @@ print("F1 Score:", f1_score(Y_test, y_pred,average="weighted")*100,"%")
 
 print(confusion_matrix(Y_test, y_pred))
 print(classification_report(Y_test, y_pred))
+
+
+
+print(df["Financial_Risk"].value_counts())

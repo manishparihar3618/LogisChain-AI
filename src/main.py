@@ -44,8 +44,9 @@ def calculate_financial_risk(row):
     if row["Asset_Utilization"] > 90:
         score += 1
 
+
     # Final Risk Level
-    if score >= 8:
+    if score >= 6:
         return "High"
 
     elif score >= 4:
