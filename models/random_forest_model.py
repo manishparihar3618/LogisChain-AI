@@ -1,3 +1,4 @@
+import joblib
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -12,20 +13,14 @@ from sklearn.preprocessing import LabelEncoder
 df = pd.read_csv("data/Financial_Risk_Dataset.csv")
 encoder = LabelEncoder()
 Y = encoder.fit_transform(df["Financial_Risk"])
-
+joblib.dump(encoder, "models/label_encoder.pkl")
 
 X = df[["Latitude","Longitude","Inventory_Level","Temperature","Humidity","Waiting_Time", "User_Transaction_Amount","User_Purchase_Frequency","Asset_Utilization","Demand_Forecast","Year","Month","Day","Hour","Day_of_Week","Traffic_Status_Detour","Traffic_Status_Heavy"]]
 Y = df["Financial_Risk"]
 
-print(X.head())
-print(Y.head())
-
 
 X_train, X_test, Y_train, Y_test = train_test_split(X,Y,test_size = 0.2,random_state=42)
-print(X_train.shape)
-print(X_test.shape)
-print(Y_train.shape)
-print(Y_test.shape)
+
 
 scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
@@ -36,6 +31,8 @@ model = RandomForestClassifier(
 n_estimators = 100,
 random_state = 42,class_weight="balanced")
 model.fit(X_train,Y_train)
+
+joblib.dump(model, "models/financial_risk_model.pkl")
 
 Y_pred = model.predict(X_test)
 
