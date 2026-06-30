@@ -7,7 +7,7 @@ Many companies face financial losses because of supply chain disruptions.
 
 ## Examples
 
-Shipment delays
+Shipment delays                                                                                                             
 Port congestion
 Supplier failures
 Inventory shortages
