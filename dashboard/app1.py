@@ -5,10 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 
-# -------------------------------------------------
 # PAGE CONFIG
-# -------------------------------------------------
-
 st.set_page_config(
     page_title="LogisChain AI",
     page_icon="🚚",
@@ -16,10 +13,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# -------------------------------------------------
 # LOAD MODEL
-# -------------------------------------------------
-
 model = joblib.load("models/financial_risk_model.pkl")
 
 try:
@@ -27,10 +21,7 @@ try:
 except:
     data = pd.read_csv("data/smart_logistics_dataset.csv")
 
-# -------------------------------------------------
 # CUSTOM CSS
-# -------------------------------------------------
-
 st.markdown("""
 <style>
 
@@ -90,10 +81,7 @@ Modern analytics dashboard for predicting financial risk using Machine Learning.
 
 st.divider()
 
-# -------------------------------------------------
 # KPI CARDS
-# -------------------------------------------------
-
 c1,c2,c3,c4=st.columns(4)
 
 with c1:
@@ -123,8 +111,6 @@ with c4:
 st.divider()
 
 # SIDEBAR
-# =====================================================
-
 st.sidebar.title("🚚 Logistics Details")
 
 st.sidebar.markdown("Enter shipment information")
@@ -240,10 +226,7 @@ predict = st.sidebar.button(
     "🚀 Predict Financial Risk"
 )
 
-# =====================================================
 # CREATE INPUT DATAFRAME
-# =====================================================
-
 sample = pd.DataFrame({
 
 "Latitude":[latitude],
@@ -283,28 +266,20 @@ sample = pd.DataFrame({
 })
 
 # PREDICTION
-
 prediction = None
 
 if predict:
 
     prediction = model.predict(sample)[0]
-
     st.success("Prediction Completed Successfully ✅")
 
 # MAIN DASHBOARD
-# =====================================================
-
 if prediction is not None:
 
     st.divider()
 
-    # -----------------------------
     # Updated KPI Cards
-    # -----------------------------
-
     k1, k2, k3, k4 = st.columns(4)
-
     with k1:
         st.metric(
             "📦 Total Shipments",
@@ -331,10 +306,7 @@ if prediction is not None:
 
     st.divider()
 
-    # -----------------------------
     # Prediction + Gauge
-    # -----------------------------
-
     left, right = st.columns([2,1])
 
     with left:
@@ -408,7 +380,6 @@ Financial loss probability is high.
         ))
 
         gauge.update_layout(height=350)
-
         st.plotly_chart(
             gauge,
             use_container_width=True
@@ -416,10 +387,7 @@ Financial loss probability is high.
 
     st.divider()
 
-    # -----------------------------
     # Shipment Summary
-    # -----------------------------
-
     st.subheader("📦 Shipment Summary")
 
     s1, s2, s3 = st.columns(3)
@@ -468,10 +436,7 @@ Traffic
 
     st.divider()
 
-    # -----------------------------
     # AI Recommendation
-    # -----------------------------
-
     st.subheader("🤖 AI Recommendation")
 
     if prediction=="Low":
@@ -517,10 +482,7 @@ Traffic
 """)
 
 # ANALYTICS DASHBOARD
-# =====================================================
-
 st.divider()
-
 st.header("📊 Analytics Dashboard")
 
 tab1, tab2, tab3 = st.tabs([
@@ -529,14 +491,9 @@ tab1, tab2, tab3 = st.tabs([
     "🌍 Dataset"
 ])
 
-# =====================================================
 # TAB 1
-# =====================================================
-
 with tab1:
-
     col1, col2 = st.columns(2)
-
     with col1:
 
         st.subheader("Financial Risk Distribution")
@@ -580,10 +537,7 @@ with tab1:
             use_container_width=True
         )
 
-# =====================================================
 # TAB 2
-# =====================================================
-
 with tab2:
 
     c1,c2=st.columns(2)
@@ -654,10 +608,7 @@ with tab2:
             use_container_width=True
         )
 
-# =====================================================
 # TAB 3
-# =====================================================
-
 with tab3:
 
     st.subheader("Dataset Preview")
@@ -701,8 +652,6 @@ with tab3:
     )
 
 # FEATURE IMPORTANCE
-# =====================================================
-
 st.divider()
 
 st.header("🔥 Model Insights")
@@ -745,10 +694,7 @@ except:
 
     st.info("Feature importance not available for this trained model.")
 
-# =====================================================
 # SHIPMENT MAP
-# =====================================================
-
 st.divider()
 
 st.header("🌍 Shipment Location")
@@ -763,14 +709,9 @@ map_df = pd.DataFrame({
 
 st.map(map_df)
 
-# =====================================================
 # DOWNLOAD BUTTON
-# =====================================================
-
 st.divider()
-
 st.header("📥 Download Prediction")
-
 csv = sample.to_csv(index=False)
 
 st.download_button(
@@ -785,10 +726,7 @@ st.download_button(
 
 )
 
-# =====================================================
 # PROJECT INFORMATION
-# =====================================================
-
 st.divider()
 
 st.header("📌 Project Information")
@@ -845,10 +783,7 @@ Random Forest Classifier
 
 """)
 
-# =====================================================
 # FOOTER
-# =====================================================
-
 st.divider()
 
 st.markdown(
